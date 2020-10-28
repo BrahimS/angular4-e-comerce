@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
+import { TestService } from './test.service';
 
 @Component({
 	selector: 'test',
 	template: `
-		<h2>{{ getTitle() }}</h2>
+		<h2>{{ title }}</h2>
 		<ul>
 			<li *ngFor="let course of courses">{{ course.toUpperCase() }}</li>
 		</ul>
 	`,
 })
 export class TestComponent {
-	name = 'this is angular testing';
-	courses = ['course One', 'course Two', 'course Three'];
-	getTitle() {
-		return this.name;
+	title = 'List of Courses';
+	courses;
+
+	constructor(service: TestService) {
+		this.courses = service.getCourses();
 	}
 }
